@@ -7,6 +7,23 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
+require('dotenv').config()
+const mongoose = require('mongoose')
+mongoose.set('strictQuery', false)
+
+const url = process.env.MONGODB_URI;
+
+async function main() {
+    try {
+        console.log('connecting to DB');
+        await mongoose.connect(url)
+        console.log('Connected to DB');
+    } catch (err) {
+        console.log("Error:", err);
+    }
+}
+main()
+
 const app = express();
 
 // view engine setup
