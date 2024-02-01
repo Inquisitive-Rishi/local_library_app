@@ -1,5 +1,16 @@
-extends layout
+extends layout 
 
-block content
-  h1= title
-  p Welcome to #{title}
+block content 
+  h1= title 
+  p Welcome to #[em Local Library], a very basic express website developed as a tutorial example.
+  
+  h1 Dynamic Contents
+
+  p The library has the following record counts 
+
+  ul 
+    li #[strong Books:] !{book_count}
+    li #[strong Copies:] !{book_instance_count}
+    li #[strong Available copies:] !{available_book_instance_count}
+    li #[strong Authors:] !{author_count}
+    li #[strong Genres:] !{genre_count}
