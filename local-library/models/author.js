@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { DateTime } = require('luxon')
 
 const Schema = mongoose.Schema;
 
@@ -15,6 +16,16 @@ AuthorSchema.virtual("name").get(function () {
         fullName = `${this.first_name}, ${this.family_name}`
     }
     return fullName;
+})
+
+AuthorSchema.virtual("dates").get(function() {
+    if (this.date_of_birth && this.date_of_death) {
+        return DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED) + " - " + DateTime.fromJSDate(this.date_of_death).toLocaleString(DateTime.DATE_MED)
+    } else if (this.date_of_birth) {
+        return DateTime.fromJSDate(this.date_of_birth).toLocaleString(DateTime.DATE_MED)
+    } else {
+        return 'No dates available'
+    }
 })
 
 AuthorSchema.virtual("url").get(function() {
