@@ -11,7 +11,6 @@ exports.bookinstance_list = asyncHandler(async (req, res, next) => {
 });
   
   // Display detail page for a specific BookInstance.
-// Display detail page for a specific BookInstance.
 exports.bookinstance_detail = asyncHandler(async (req, res, next) => {
   const bookInstance = await BookInstance.findById(req.params.id)
     .populate("book")
