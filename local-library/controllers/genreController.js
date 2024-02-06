@@ -51,6 +51,7 @@ exports.genre_detail = asyncHandler(async (req, res, next) => {
 
       const genre = new Genre({ name: req.body.name })
 
+      // if errors
       if (!errors.isEmpty()) {
         res.render("genre_form", {
           title: "Create Genre",
