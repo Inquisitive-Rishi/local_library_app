@@ -12,7 +12,6 @@ exports.bookinstance_list = asyncHandler(async (req, res, next) => {
   })
 });
   
-  // Display detail page for a specific BookInstance.
 exports.bookinstance_detail = asyncHandler(async (req, res, next) => {
   const bookInstance = await BookInstance.findById(req.params.id)
     .populate("book")
@@ -31,7 +30,6 @@ exports.bookinstance_detail = asyncHandler(async (req, res, next) => {
 });
 
   
-  // Display BookInstance create form on GET.
   exports.bookinstance_create_get = asyncHandler(async (req, res, next) => {
     const allBooks = await Book.find({}, "title").sort({ title: 1 }).exec()
 
@@ -41,7 +39,6 @@ exports.bookinstance_detail = asyncHandler(async (req, res, next) => {
     })
   });
   
-  // Handle BookInstance create on POST.
 exports.bookinstance_create_post = [
   body("book", "Book must be specified").trim().isLength({ min: 1 }).escape(),
   body("imprint", "Imprint must be specified")
@@ -82,8 +79,6 @@ exports.bookinstance_create_post = [
   }),
 ];
 
-  
-  // Display BookInstance delete form on GET.
   exports.bookinstance_delete_get = asyncHandler(async (req, res, next) => {
     res.send("NOT IMPLEMENTED: BookInstance delete GET");
   });
