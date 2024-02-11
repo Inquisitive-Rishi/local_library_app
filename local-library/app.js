@@ -8,6 +8,9 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const catalogRouter = require('./routes/catalog')
 
+const compression = require('compression')
+const helmet = require('helmet')
+
 require('dotenv').config()
 const mongoose = require('mongoose')
 mongoose.set('strictQuery', false)
@@ -26,6 +29,18 @@ async function main() {
 main()
 
 const app = express();
+
+const RateLimit = require('express-rate-limit')
+const limiter = RateLimit({
+  windowMs: 1*60*1000,  //1 minute
+  max: 20
+})
+
+app.use(limiter)
+
+app.use(compression())
+
+app.use(helmet())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
